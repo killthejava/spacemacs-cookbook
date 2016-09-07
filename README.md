@@ -1815,4 +1815,4 @@ Licencia
 ========
 
 <br>
-Liberado bajo Creative Commons 1.0 Universal.
+Liberado bajo licencia MIT.

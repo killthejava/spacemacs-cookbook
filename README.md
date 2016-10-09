@@ -3,6 +3,8 @@ Spacemacs Cookbook
 <br>
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://github.com/syl20bnr/spacemacs)
 
+*Actualizado para Spacemacs 0.200*
+
 <br>
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Tabla de contenidos**
@@ -117,11 +119,11 @@ Helm proporciona varias funcionalidades en torno al manejo de buffers, archivos,
   </thead>
   <tbody>
     <tr>
-      <td width="30%">C-n</td>
+      <td width="30%">C-n <em>o</em> C-j</td>
       <td>Mueve el cursor al siguiente elemento</td>
     </tr>
     <tr>
-      <td>C-p</td>
+      <td>C-p <em>o</em> C-k</td>
       <td>Mueve el cursor al elemento anterior</td>
     </tr>
     <tr>
@@ -129,7 +131,7 @@ Helm proporciona varias funcionalidades en torno al manejo de buffers, archivos,
       <td>Activa auto-completado</td>
     </tr>
     <tr>
-      <td>[Enter] o C-m</td>
+      <td>[Enter] <em>o</em> C-m</td>
       <td>Abre el elemento seleccionado</td>
     </tr>
     <tr>
@@ -221,7 +223,7 @@ Con `SPC f f` ejecutamos `helm-find-files`, un buscador de archivos con auto-com
       <td>Ingresa al directorio seleccionado</td>
     </tr>
     <tr>
-      <td>S-[Tab]</td>
+      <td>C-h o S-[Tab]</td>
       <td>Sube un nivel de directorio</td>
     </tr>
     <tr>
@@ -252,7 +254,7 @@ Para realizar una operación con un registro ingresamos `"`, el nombre del regis
 
 <br>
  * `"ayy`   : Copiar la línea actual al registro `a`.
- * `"ay`    : Copiar texto seleccionado al registro `a` (`view-mode`).
+ * `"ay`    : Copiar texto seleccionado al registro `a` (view-mode).
  * `"ap`    : Pega el valor del registro `a`. Usar `"aP` para pegar antes del cursor.
 
 <br>
@@ -280,7 +282,7 @@ Supongamos que deseamos insertar en el documento actual la versión de `Emacs` q
 
 <br>
  * `SPC :`, para ingresar un comando por nombre.
- * Ingresamos `version`.
+ * Ingresamos `version` (también funciona con `emacs-version`).
  * Hacemos `C-u` y luego `[Enter]`.
 
 <br>
@@ -348,11 +350,11 @@ Llamamos ventana al área visual donde se muestra el contenido de un buffer. Cad
       <td>Divide una ventana en 2 ventanas orientadas horizontalmente</td>
     </tr>
     <tr>
-      <td>SPC w c</td>
+      <td>SPC w d</td>
       <td>Cierra la ventana actual</td>
     </tr>
     <tr>
-      <td>SPC w C</td>
+      <td>SPC w D</td>
       <td>Cierra otra ventana. La ventana a cerrar corresponde a la letra que aparece en rojo en la esquina superior izquierda</td>
     </tr>
     <tr>
@@ -404,11 +406,15 @@ Manipulación de buffers
   <tbody>
     <tr>
       <td width="30%">SPC b b</td>
-      <td>Invoca a helm-mini</td>
+      <td>Invoca a helm-mini, mostrando el listado de buffers abiertos</td>
     </tr>
     <tr>
       <td>SPC b d</td>
       <td>Elimina el buffer actual</td>
+    </tr>
+    <tr>
+      <td>SPC b D</td>
+      <td>Elimina todos los buffers excepto el actual</td>
     </tr>
     <tr>
       <td>SPC [Tab]</td>
@@ -446,13 +452,13 @@ Manipulación de buffers
 </table>
 
 <br>
-Haciendo `SPC b .` entramos al buffer micro-state. En este estado tenemos los siguientes atajos:
+Para eliminar un buffer junto con la ventana donde se visualiza ingresar la combinación `SPC u SPC b d`. Haciendo `SPC b .` entramos al buffer transient-state. En este estado tenemos los siguientes atajos:
 
 <br>
 <table width="95%">
   <thead>
     <tr>
-      <th colspan="2">Buffer Micro State</th>
+      <th colspan="2">Buffer Transtient State</th>
     </tr>
   </thead>
   <tbody>
@@ -472,7 +478,7 @@ Haciendo `SPC b .` entramos al buffer micro-state. En este estado tenemos los si
 </table>
 
 <br>
-Presionando cualquier otra tecla saldremos del micro-state.
+Presionando cualquier otra tecla saldremos del transient-state.
 
 <br>
 Reemplazar texto
@@ -530,7 +536,7 @@ Bookmarks
 ----
 
 <br>
-Los bookmarks son similares a los marks con la diferencia de que estos persisten una vez que cerramos un documento. Haciendo `SPC h b` activamos `helm-bookmarks`. Este buffer nos permite crear nuevos bookmarks o navegar a otros ya existentes. La interfaz provee estos atajos:
+Los bookmarks son similares a los marks con la diferencia de que estos persisten una vez que cerramos un documento. Haciendo `SPC f b` activamos `helm-bookmarks`. Este buffer nos permite crear nuevos bookmarks o navegar a otros ya existentes. La interfaz provee estos atajos:
 
 <br>
 <table width="95%">
@@ -545,12 +551,8 @@ Los bookmarks son similares a los marks con la diferencia de que estos persisten
       <td>Elimina un bookmark. Podemos borrar varios seleccionándolos con C-SPC</td>
     </tr>
     <tr>
-      <td>C-e</td>
+      <td>M-e</td>
       <td>Edita el bookmark seleccionado</td>
-    </tr>
-    <tr>
-      <td>C-o</td>
-      <td>Abre la ubicación del bookmark en otra ventana</td>
     </tr>
   </tbody>
 </table>
@@ -570,10 +572,16 @@ Este es un listado de atajos de edición que puede resultar útil conocer:
  * **Comillas**: Para meter un texto entre comillas primero lo seleccionamos  y luego ingresamos `s"`. Para pasar un texto entre comillas dobles a comillas simples hacer `cs"'`. Para eliminar las comillas del todo hacer `ds"`. 
  * **Espacios sobrantes**: Spacemacs permite eliminar líneas de espacios sobrantes haciendo `SPC x d w`.
  * **Un solo espacio**: Podemos reducir el número de espacios entre palabras a uno posicionando el cursor sobre cualquiera de ellos e invocando a `just-one-space`.
- * **Mayúsculas y minúsculas**: `SPC x u` pasa a minúsculas el texto seleccionado. `SPC x U` para pasar a mayúsculas.
+ * **Mayúsculas y minúsculas**: `SPC x u` pasa a minúsculas el texto seleccionado. Utilizar `SPC x U` para pasar a mayúsculas.
  * **Expandir selección**: Haciendo `SPC v` entramos en el modo `expand-region`. En este modo podemos expandir y contraer una selección con `v` y `V`, `r` para volver a la original y `[Esc]` para salir.
- * **Editar líneas**: Ingresando `J` concatenamos la línea actual con la siguiente. `SPC j j` divide la línea justo en la posición del cursor. `SPC j k` mueve el cursor a la siguiente línea y la auto indenta.
+ * **Editar líneas**: Ingresando `J` concatenamos la línea actual con la siguiente. `SPC j n` divide la línea justo en la posición del cursor. `SPC j k` mueve el cursor a la siguiente línea y la auto indenta.
  * **Comentarios**: Podemos comentar una selección haciendo `M-;`. Haciendo `SPC c l` comentamos la línea actual. `SPC c p` comenta un parágrafo completo.
+
+<br>
+Deshacer
+----
+
+Para deshacer un cambio (*undo*) ingresar `u`. Para repetir un cambio (*redo*) hacer `C-?`. Podemos ver el historial de cambios del documento haciendo `SPC a u`. Este comando invoca `undo-tree-visualize`. Para salir ingresamos `q`.
 
 <br>
 Intercambiar cadenas
@@ -726,7 +734,7 @@ Gestión de proyectos
 [Projectile](https://github.com/bbatsov/projectile) es una extensión que facilita el acceso a archivos dentro de un proyecto, lo que resulta útil para organizar grandes repositorios de código. Cada vez que accedamos a un directorio conteniendo un repositorio Git, Projectile se encargará de agregarlo a un listado interno de proyectos. Haciendo `SPC p p` invocamos a `helm-projectile`, un selector que lista los proyectos abiertos anteriormente. Si abrimos un archivo y luego `SPC p h` podremos acceder a otros archivos dentro del mismo proyecto. Para cerrar todos los buffers abiertos dentro de un proyecto hacemos `SPC p k`.
 
 <br>
-Si hacemos `SPC p t` se abrirá una ventana ejecutando NeoTree, una extensión para navegación de directorios. Para navegar entre los directorios utilizamos `h`, `j`, `k` y `l`. Con `[Enter]` abrimos un archivo y con `R` fijamos el directorio seleccionado como el raíz. NeoTree siempre se ejecutará en la ventana `0`, por lo que podemos navegar de vuelta haciendo `SPC 0`.
+Si hacemos `SPC p t` se abrirá una ventana ejecutando NeoTree, una extensión para navegación de directorios. Para navegar entre los directorios utilizamos `h`, `j`, `k` y `l`. Con `[Enter]` abrimos un archivo y con `R` fijamos el directorio seleccionado como el raíz. NeoTree siempre se ejecutará en la ventana `0`, por lo que podemos navegar de vuelta haciendo `SPC 0`. Para actualizar el arbol de directorios hacer `gr`.
 
 <br>
 Por último, si deseamos realizar una búsqueda dentro de un proyecto hacemos `SPC s g p`. Este atajo permitirá realizar una búsqueda usando `grep` dentro de la carpeta conteniendo el proyecto. Spacemacs también soporta hacer búsquedas utilizando otros comandos como `ack` y `ag`.
@@ -736,7 +744,7 @@ Buscar texto con ag
 -------------------
 
 <br>
-Es posible realizar búsquedas utilizando `ag` en lugar de `grep`. Para esto primero debemos instalar esta herramienta en el sistema. Por ejemplo, en sistemas basados en Debian haremos:
+Es posible realizar búsquedas utilizando `ag` en lugar de `grep`. Para esto primero debemos instalar esta herramienta en el sistema. Por ejemplo, en sistemas Debian haremos:
 
 <br>
 ``` shell
@@ -780,7 +788,7 @@ Combinando `iedit` y `ag` podemos reemplazar texto en varios archivos dentro de 
  * Ingresamos el texto a reemplazar y hacemos `C-c C-e`.
  * Ingresamos a modo `iedit` ya sea haciendo `SPC s e` o `SPC v e`.
  * Realizamos la modificación y hacemos `C-c C-c`.
- 
+
 <br>
 Snippets
 ----
@@ -814,7 +822,7 @@ Para guardar el snippet hacemos `C-c C-c`. Por defecto, los snippets se almacena
 > Tip: Spacemacs permite insertar "lorem ipsum" en varios formatos. Buscar comandos bajo el prefijo `SPC i l`.
 
 <br>
-Una alternativa a este procedimiento es abrir el buffer `* scratch *`, crear un snippet en él y luego hacer `SPC :` invocando a `yas-load-snippet-buffer`. Esta función cargará el snippet del buffer actual en la tabla del modo que definamos.
+Una alternativa a este procedimiento es abrir el buffer `* scratch *` y activar `snippet-mode`. Luego, crear un snippet y hacer `SPC :` invocando a `yas-load-snippet-buffer`. Esta función cargará el snippet del buffer actual en la tabla del modo que definamos. *Este método no guarda el contenido del snippet*.
 
 <br>
 Los snippets también soportan argumentos. Supongamos que estamos en `web-mode` y queremos un snippet para insertar un `jumbotron` de [Bootstrap](http://getbootstrap.com):
@@ -866,7 +874,7 @@ Layouts
 -------
 
 <br>
-Si alguna vez utilizaste Eclipse seguramente el concepto de *perspectivas* te resulte familiar. Los *layouts* representan configuraciones aplicadas a un conjunto de ventanas. Estas configuraciones almacenan la disposición de cada ventana y el conjunto de buffers visualizados. Haciendo `SPC l` entramos al *layouts micro state*. En este modo contamos con los siguientes atajos:
+Si alguna vez utilizaste Eclipse seguramente el concepto de *perspectivas* te resulte familiar. Los *layouts* representan configuraciones aplicadas a un conjunto de ventanas. Estas configuraciones almacenan la disposición de cada ventana y el conjunto de buffers visualizados. Haciendo `SPC l` entramos al *layouts transient state*. En este modo contamos con los siguientes atajos:
 
 <br>
 <table width="95%">
@@ -1101,7 +1109,7 @@ version-control
 ---------------
 
 <br>
-Esta layer agrega márgenes a los buffers dentro de un repositorio mostrando las diferencias respecto al contenido versionado. Haciendo `SPC g .` entramos al `vcs microstate`. En este estado podemos recorrer los cambios introducidos con `n` y `N`. En cada cambio podemos luego mostrar las diferencias con `h` o revertir a la versión anterior con `r`.
+Esta layer agrega márgenes a los buffers dentro de un repositorio mostrando las diferencias respecto al contenido versionado. Haciendo `SPC g .` entramos al `vcs transient-state`. En este estado podemos recorrer los cambios introducidos con `n` y `N`. En cada cambio podemos luego mostrar las diferencias con `h` o revertir a la versión anterior con `r`.
 
 <br>
 Magit
@@ -1161,6 +1169,9 @@ Magit
 Si ingresamos `c` entramos en el menú para `Commit`. Ingresando `c` nuevamente podremos ingresar un mensaje de commit. En esta vista veremos el listado de cambios en la otra ventana. Para desplazar el contenido de la misma sin dejar la ventana actual podemos hacer `M-PgDown` y `M-PgUp`. Una vez ingresemos el mensaje haremos `C-c C-c` para finalizar el commit. Podemos luego realizar un `push` de los cambios ingresando `P` y luego eligiendo el branch a pushear.
 
 <br>
+A partír de Spacemacs 0.200, Magit agrega un *dispatch menu* accesible haciendo `SPC g m`.
+
+<br>
 helm-gitignore
 --------------
 
@@ -1208,6 +1219,9 @@ Markdown es un formato sencillo para generar documentación que tiene la ventaja
     </tr>
   </tbody>
 </table>
+
+<br>
+El prefijo `SPC m h` también puede ser seguido de un número entre 1 y 6. El número indica el nivel de anidamiento de la cabecera a crear.
 
 <br>
 Seleccionando un fragmento de texto podemos aplicarle las siguientes transformaciones:
@@ -1311,7 +1325,7 @@ Para empezar a utilizar este modo haremos lo siguiente:
  * Ahora hacemos `SPC m h i`. Una nueva cabecera es creada. Le asignamos otro nombre.
 
 <br>
-Si se hizo todo correctamente entonces deberíamos obtener 2 cabeceras distintas. Ahora ubiquémonos en cualquiera y hagamos lo siguiente:
+Si se hizo todo correctamente entonces deberíamos obtener 2 cabeceras distintas. Ahora nos ubicamos en la subcabecera y hacemos lo siguiente:
 
 <br>
  * Ingresamos `o` para agregar un texto descriptivo bajo una cabecera.
@@ -1349,7 +1363,7 @@ Podemos navegar entre cabeceras utilizando los atajos provistos por `evil-org-mo
 </table>
 
 <br>
-Existen otros atajos cuyo comportamiento depende de la posición del cursor en la cabecera. Por ejemplo, hacer `M-[Enter]` agrega una cabecera del mismo nivel. Si el cursor está en el espacio en blanco entre el `bullet` y el texto de la cabecera el elemento es insertado arriba. En el caso de que se encuentre sobre texto, el texto ubicado despues del cursor es usado como el nombre de la nueva cabecera. Podemos anular este comportamiento haciendo `SPC u` previo a ingresar `M-[Enter]`.
+Existen otros atajos cuyo comportamiento depende de la posición del cursor en la cabecera. Por ejemplo, hacer `M-[Enter]` agrega una cabecera del mismo nivel. Si el cursor está en el espacio en blanco entre el `bullet` y el texto de la cabecera el elemento es insertado arriba. En el caso de que se encuentre sobre texto, el texto ubicado despues del cursor es usado para el nombre de la nueva cabecera. Podemos anular este comportamiento haciendo `SPC u` previo a ingresar `M-[Enter]`.
 
 <br>
 <table width="95%">
@@ -1403,7 +1417,7 @@ Texto y Enlaces
 -------
 
 <br>
-En `org-mode` podemos aplicar distintos tipos de transformaciones al texto insertado, así como también agregar enlaces:
+En `org-mode` podemos aplicar distintos tipos de transformaciones al texto insertado, así como también agregar enlaces. Los atajos comenzados con `SPC m x` permite modificar un texto en view mode.
 
 <br>
 <table width="95%">
@@ -1440,7 +1454,7 @@ En `org-mode` podemos aplicar distintos tipos de transformaciones al texto inser
 </table>
 
 <br>
-Haciendo `SPC m i l` sobre un enlace existente nos permite modificarlo. En caso de querer solo copiar la ruta del enlace podemos agregar los siguiente a nuestra configuración:
+Haciendo `SPC m i l` sobre un enlace existente nos permite modificarlo. En caso de querer solo copiar la ruta del enlace podemos agregar lo siguiente a nuestra configuración:
 
 <br>
 ``` emacs-lisp
@@ -1455,7 +1469,7 @@ Haciendo `SPC m i l` sobre un enlace existente nos permite modificarlo. En caso 
 ```
 
 <br>
-Esta función copiara al `kill-ring` la ruta del enlace ubicado bajo el cursor (siempre y cuando nos encontremos en `org-mode`). Luego podemos asociar una atajo para mayor comodidad:
+Esta función copiará al `kill-ring` la ruta del enlace ubicado bajo el cursor (siempre y cuando nos encontremos en `org-mode`). Luego podemos asociar una atajo para mayor comodidad:
 
 <br>
 ``` emacs-lisp
@@ -1487,7 +1501,7 @@ Ingresando `t` podemos transformar una cabecera en un `TODO` (o tarea). Ingresan
       <td>Permite definir la prioridad de la tarea. Los valores soportados son "A", "B" y "C"</td>
     </tr>
     <tr>
-      <td>SPC m :</td>
+      <td>C-c C-c</td>
       <td>Permite definir tags. Los tags ingresados deben ser separados por el carácter ":"</td>
     </tr>
     <tr>
@@ -1506,7 +1520,7 @@ Ingresando `t` podemos transformar una cabecera en un `TODO` (o tarea). Ingresan
 </table>
 
 <br>
-Podemos definir los estados por los que transita una tarea ya sea en el mismo archivo o en nuestro propio archivo de configuración. Para lograr lo primero nos ubicamos en la primera línea del documento y agregamos lo siguiente:
+Podemos definir los estados por los que transita una tarea ya sea en el mismo archivo o en nuestro propio archivo de configuración. Para esto, primero nos ubicamos en la primera línea del documento y agregamos lo siguiente:
 
 <br>
 `#+TODO: PENDIENTE EN-PROGRESO(s) | TERMINADA`
@@ -1531,7 +1545,7 @@ De manera similar podemos definir tags personalizados en el documento:
 `#+TAGS: { @TRABAJO(t) @FAMILIA(f) } TELEFONO(T) PROYECTO(p)`
 
 <br>
-En este caso definimos 2 tags excluyentes (Trabajo y Familia). En caso de querer definirlos directamente en la configuración de Spacemacs deberemos agregar lo siguiente:
+En este caso definimos 2 tags excluyentes (Trabajo y Familia). En caso de querer definirlos directamente en la configuración de Spacemacs debemos agregar lo siguiente:
 
 ``` emacs-lisp
 (setq org-tag-alist '((:startgroup . nil)
@@ -1667,7 +1681,7 @@ Utilizar `org-mode` eficientemente requerirá hacer uso de `org-agenda` y `org-c
 ```
 
 <br>
-En Spacemacs, la configuración de `org-mode` debe realizarse a través `with-eval-after-load` o de otra manera no funcionará. Esta configuración define los siguientes valores:
+En Spacemacs, la configuración de `org-mode` debe realizarse a través `with-eval-after-load` o de otra manera no funcionará. La configuración utilizada define los siguientes valores:
 
 <br>
  * El directorio que contendrá los archivos `.org` (`~/git/org`)
@@ -1710,7 +1724,7 @@ En ocasiones necesitamos apuntar una actividad mientras trabajamos. `org-capture
 ```
 
 <br>
-Haciendo `SPC o c` invocamos `org-capture`. Antes de definir el contenido de la actividad tenemos que elegir la plantilla que vamos a utilizar para la misma. Como no hemos definido ninguna elegimos la opción por defecto con `t`. Luego definimos el nombre y contenido de la tarea. Para guardarla hacemos `C-c C-c`. Por defecto, `org-capture` almacena los datos en el archivo que hayamos definido como `org-default-notes-file` (o `notes.org` en caso de no definirlo). Este archivo estará ubicado en la carpeta que hayamos definido como `org-directory`.
+Ahora, haciendo `SPC o c` invocamos `org-capture`. Antes de definir el contenido de la actividad tenemos que elegir la plantilla que vamos a utilizar para la misma. Como no hemos definido ninguna, elegimos la opción por defecto con `t`. Luego definimos el nombre y contenido de la tarea. Para guardarla hacemos `C-c C-c`. Por defecto, `org-capture` almacena los datos en el archivo que hayamos definido como `org-default-notes-file` (o `notes.org` en caso de no definirlo). Este archivo estará ubicado en la carpeta que hayamos definido como `org-directory`.
 
 <br>
 Ahora haciendo F12 podemos abrir el archivo generado. A veces resulta apropiado mover notas de este archivo a otros para organizarse mejor. Este proceso se llama *refile*. Para generar una vista de posibles destinos para notas almacenadas a través de `org-capture` vamos a agregar la siguientes líneas de configuración:
@@ -1774,6 +1788,10 @@ Ahora solo resta agregar `javascript` al listado de layers en el archivo de conf
   </thead>
   <tbody>
     <tr>
+      <td>SPC m w</td>
+      <td>Activa/desactiva advertencias y errores generados</td>
+    </tr>
+    <tr>
       <td width="30%">SPC m =</td>
       <td>Aplica web-beautify</td>
     </tr>
@@ -1788,10 +1806,6 @@ Ahora solo resta agregar `javascript` al listado de layers en el archivo de conf
     <tr>
       <td>SPC m r r V</td>
       <td>Permite renombrar el símbolo bajo el cursor</td>
-    </tr>
-    <tr>
-      <td>SPC m w</td>
-      <td>Activa/desactiva advertencias y errores generados</td>
     </tr>
     <tr>
       <td>SPC m z e</td>
